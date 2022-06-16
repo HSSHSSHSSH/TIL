@@ -65,4 +65,4 @@ class RefImpl {
  console.log(t.value);
  t.value = 2
 
- console.log('----',{num:1} == {num:1},5==5);//??
+ console.log('----',{num:1}.toString() == {num:1}.toString(),5==5);//??
