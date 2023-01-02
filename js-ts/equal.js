@@ -30,39 +30,47 @@
 // equal(obj1,obj3)
 
 // isEqualObj({num:1})
-
-class RefImpl {
-    _value
-     deps
-    constructor(value) {
-        this._value = value
-        this.deps = new Set()
-    }
+//  ----------------------------------------
+// class RefImpl {
+//     _value
+//      deps
+//     constructor(value) {
+//         this._value = value
+//         this.deps = new Set()
+//     }
  
-    get value() {
-        return this._value
-    }
+//     get value() {
+//         return this._value
+//     }
  
-    set value(newValue) {
-        console.log(Object.is(newValue,this._value));
+//     set value(newValue) {
+//         console.log(Object.is(newValue,this._value));
         
-        if(Object.is(newValue,this._value)) return //The Object.is() method determines whether two values are the same value.
-       this._value = newValue
-    }
- }
+//         if(Object.is(newValue,this._value)) return //The Object.is() method determines whether two values are the same value.
+//        this._value = newValue
+//     }
+//  }
 
- const r = new RefImpl({
-     num:1
- })
+//  const r = new RefImpl({
+//      num:1
+//  })
 
- console.log(r.value);
+//  console.log(r.value);
  
- r.value = {
-     num:1
- }
+//  r.value = {
+//      num:1
+//  }
 
- const t = new RefImpl(2)
- console.log(t.value);
- t.value = 2
+//  const t = new RefImpl(2)
+//  console.log(t.value);
+//  t.value = 2
 
- console.log('----',{num:1}.toString() == {num:1}.toString(),5==5);//??
+//  console.log('----',{num:1}.toString() == {num:1}.toString(),5==5);//??
+
+// ------------------------
+let a = '12132'
+let b 
+let c 
+b = c = a
+b = '321321'
+console.log('a',a,'b',b,'c',c);

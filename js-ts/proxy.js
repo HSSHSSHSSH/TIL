@@ -9,8 +9,11 @@ const obj2 = {
 let proxy = new Proxy(obj1, {
   get (target, key) {
     console.log(target, key, '拦截')
-    console.log(this, 'this')
+    console.log(proxy, 'this')
   }
 })
 
 proxy.count
+
+const obj3 = {...proxy}
+console.log('obj3',obj3)
