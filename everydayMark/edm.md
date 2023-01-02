@@ -1,8 +1,6 @@
 # 20220610
 
-### 公司用typora版本
 
-![09b12b3edb5b4181019d7bc5ec3cbf3](C:\Users\ADMINI~1\AppData\Local\Temp\WeChat Files\09b12b3edb5b4181019d7bc5ec3cbf3.png)
 
 ### flutter引擎启动 
 
@@ -21,3 +19,10 @@ Class  的get 和set
 ## 20220624
 
 https://github.com/resumejob/free-project-course#javascript
+
+## 20220629
+
+mini-docker
+
+https://github.com/shuveb/containers-the-hard-way
+https://unixism.net/2020/06/containers-the-hard-way-gocker-a-mini-docker-written-in-go/
