@@ -28,7 +28,7 @@
     将紧挨着h1后的紧挨着h2后的h3元素文本改成红色
 
 ## 盒模型
-  ![box_model](../../../assets/img/box_model.png)
+  <img src="../../../assets/img/box_model.png" />
 
 ## 伪类伪元素
 
