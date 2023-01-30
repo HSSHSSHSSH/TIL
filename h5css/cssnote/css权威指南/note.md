@@ -29,6 +29,8 @@
 
 ## 盒模型
   <img src="../../../assets/img/box_model.png" />
+  <img src="../../../assets/img/standard_box_model.png" />
+  <img src="../../../assets/img/ie_box_model.png" />
 
 ## 伪类伪元素
 
