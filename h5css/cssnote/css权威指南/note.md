@@ -170,3 +170,115 @@
         position属性与其父元素相同
         **是父元素，而非祖先元素**
 
+## 网页布局
+
+### Flex
+
+Flex 是Flexible Box（弹性盒子）的缩写，用于为盒状模型提供更大的灵活性。
+任何一个元素都可以指定Flex布局
+
+```
+.box {
+    display: flex
+}
+```
+行内元素也可以指定flex布局
+```
+.inline-box {
+    display: flex
+}
+```
+
+Webkit内核的浏览器设置flex布局时必须加上前缀 -webkit
+
+```
+webkit_box {
+    display: -webkit-flex
+}
+```
+将元素设置为Flex布局后，其子元素的float,clear,vertical-align属性将失效
+
+设置为flex布局的元素称为 Flex Container，其下的子元素称为Flex Item
+
+### Flex Container属性
+
+| 属性名称        | 值                                            | 效果     |
+|----------------|-----------------------------------------------|----------|
+| flex-direction | row（默认） row-reverse column column-reverse | 主轴方向  |
+| flex-wrap      | nowrap(默认，不换行) wrap（换行，第一行在上） wrap-reverse（换行，第一行在上）  | 是否换行 如何换行|
+| flex-flow      |   {flex-direction} {flex-wrap}             | flex-direction与flex-wrap的简写
+| justify-content| flex-start(默认，从主轴开始方向排列) flex-end（从主轴结束方向排列） center（居中排列） space-between（两端对齐，items之间间距相同） space-around（items两侧之间间隔相等） | flex items在主轴上的排列方式  |
+|align-items | flex-start(从交叉轴起点对齐) flex-end(从交叉轴终点对齐) center（交叉轴中点对齐） baseline（item第一行的基线对齐） stretch（默认值，若未item设置高度/宽度或设置为auto,则沾满整个容器的高度，交叉轴开始方向对齐） | 在交叉轴上的对齐方式 |
+| align-content | flex-start flex-end center space-between space-around stretch  | 多行的对齐方式，若items只有一行，则属性无效 | 
+|
+
+
+ #### align-items与align-content的区别 
+ 因align-items在 Flex Items 多行排列时生效，且当Flex Items在交叉轴方向占满Container时，两者并无差别，故以下只考虑Flex Items多行排列且交叉轴方向扔有剩余空间的情况。以
+
+ ```
+ <body>
+    <div class="my_block_box">
+        <div class="son" style="background:blue;">块子元素1</div>
+        <div class="son" style="background:yellow">块子元素2</div>
+        <div class="son" style="background:green">块子元素3</div>
+        <div class="son" style="background:blue">块子元素4</div>
+        <div class="son" style="background:green">块子元素5</div>
+        <div class="son" style="background:yellow">块子元素6</div>
+        <div class="son" style="background:green">块子元素7</div>
+        <div class="son" style="background:blue">块子元素8</div>
+    </div>
+</body>
+    
+<style>
+    .son {
+        height: 50px;
+    }
+    .my_block_box{
+        height: 200px;
+        width: 300px;
+        background-color: red;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center; //仅改变了此属性
+    }
+</style>
+ ```
+ <image src="../../../assets/img/align_content.png" />
+ 
+**默认为每一行平均分配其占据的高度，每一行的Flex Items在其所在行交叉轴方向居中对齐**
+
+```
+<body>
+    <div class="my_block_box">
+        <div class="son" style="background:blue;">块子元素1</div>
+        <div class="son" style="background:yellow">块子元素2</div>
+        <div class="son" style="background:green">块子元素3</div>
+        <div class="son" style="background:blue">块子元素4</div>
+        <div class="son" style="background:green">块子元素5</div>
+        <div class="son" style="background:yellow">块子元素6</div>
+        <div class="son" style="background:green">块子元素7</div>
+        <div class="son" style="background:blue">块子元素8</div>
+    </div>
+</body>
+    
+<style>
+    .son {
+        height: 50px;
+    }
+    .my_block_box{
+        height: 200px;
+        width: 300px;
+        background-color: red;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center; //仅改变了此属性
+    }
+```
+<image src="../../../assets/img/align_items.png" />
+
+**将所有行当作一行，交叉轴居中对齐**
+
+ ### Flex items的属性
