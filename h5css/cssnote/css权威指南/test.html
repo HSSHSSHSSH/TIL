@@ -8,30 +8,33 @@
 </head>
 <body>
     <div class="my_block_box">
-        <div class="son" style="background:blue;">块子元素1</div>
-        <div class="son" style="background:yellow">块子元素2</div>
-        <div class="son" style="background:green">块子元素3</div>
-        <div class="son" style="background:blue">块子元素4</div>
-        <div class="son" style="background:green">块子元素5</div>
-        <div class="son" style="background:yellow">块子元素6</div>
-        <div class="son" style="background:green">块子元素7</div>
-        <div class="son" style="background:blue">块子元素8</div>
+        <div class="son1" style="background:blue;">块子元素11111111</div>
+        <div class="son2" style="background:yellow">块子元素2222222</div>
+        <div class="son3" style="background:green">块子元素3</div>
     </div>
 </body>
     
 <style>
-    .son {
-        height: 50px;
+    .son1 {
+        width: 100px;
+        flex-basis: 500px;
+    }
+    .son2{
+        width: 100px
+    }
+    .son3{
+        width: 100px;
     }
     .my_block_box{
         height: 200px;
         width: 300px;
         background-color: red;
+        /* flex-direction: column; */
         display: flex;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         justify-content: center;
         /* align-items: center; */
-        align-content: center;
+        /* align-content: center; */
     }
 </style>
 

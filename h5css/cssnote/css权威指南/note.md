@@ -282,3 +282,13 @@ webkit_box {
 **将所有行当作一行，交叉轴居中对齐**
 
  ### Flex items的属性
+
+ | 属性值 | 值 | 效果 |
+ | ------- | --------- | --------- |
+ | order   | 整数(默认为0) | 按照数值由小到大排列 |
+ | flex    |   非负数（默认为0）   | 按照flex的比例分配主轴上的空间   |
+ | flex-grow| 非负数（默认0）      | container主轴方向上有剩余空间时，item的放大比例， 0不放大 |
+ | flex-shrink | 非负数（默认1）   | container主轴方向空间不足时，item的缩小比例，0不缩小 |
+ | flex-basis | \<length> OR auto | 属性定义了在分配多余空间之前，项目占据的主轴空间（main size）(优先级高于height与width,受限制与min-width和max-width)|
+ | flex | none OR \<flex-grow> \<flex-shrink> \<flex-basis>(默认为 0 1 auto;该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。) | flex-grow flex-shrink flex-basis的简写，后两个属性可选 |
+ | align-self | auto flex-start flex-end center baseline stretch(默认auto,继承container的align-item属性) | 为项目单独定义对齐方式，与container的align-item效果相同（除auto）  |
