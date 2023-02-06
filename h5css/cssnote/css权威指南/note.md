@@ -292,3 +292,109 @@ webkit_box {
  | flex-basis | \<length> OR auto | 属性定义了在分配多余空间之前，项目占据的主轴空间（main size）(优先级高于height与width,受限制与min-width和max-width)|
  | flex | none OR \<flex-grow> \<flex-shrink> \<flex-basis>(默认为 0 1 auto;该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。) | flex-grow flex-shrink flex-basis的简写，后两个属性可选 |
  | align-self | auto flex-start flex-end center baseline stretch(默认auto,继承container的align-item属性) | 为项目单独定义对齐方式，与container的align-item效果相同（除auto）  |
+
+## Grid布局
+
+网格布局（Grid）划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。
+
+同Flex布局，以下将采用Grid布局的容器称为Container，其下的子元素称为Item.
+
+为一个容器指定grid布局
+```
+.box {
+    display: grid
+}
+```
+为一个行内元素指定grid布局
+.box {
+    display: inline-grid
+}
+**将容器设置为grid布局后，item的float,display:inline-block,display:table-cell,vertical-align,column-[]会失效**
+
+
+### 容器属性
+| 属性 | 值 | 效果 |
+| ----------------- | --------------- | ---------------|
+| grid-template-rows |    长度列   | 规定Container的行数和行高 |
+| grid-template-columns| 长度列    | 规定Container的列数和列宽 |
+| row-gap (原 grid-row-gap)      | \<length>   | 规定行间距 |
+| column-gap (原 grid-column-gap)       | \<length>   | 规定列间距 |
+| gap 原 (grid-gap) | \<length> \<length> | \<grid-row-gap> \<grid-column-gap>(若忽略了第二个值则浏览器认为第二个值等于第一个值)  |
+| grid-template-areas | 详述如下 | 规定区域 |
+
+#### grid-template-rows、grid-template-columns属性值
+- 绝对单位
+```
+.container {
+    display: gird;
+    grid-template-rows: 100px 200px 300px
+    grid-template-columns: 300px 200px 100px
+}
+```
+- 百分数 
+```
+ .container {
+    display: gird;
+    grid-template-rows: 30% 20% 50%
+    grid-template-columns: 50% 30% 20%
+}
+```
+- repeat函数
+```
+.container {
+    display: gird;
+    grid-template-rows: repeat(3,100px)
+    grid-template-columns: repeat(3,200px)
+}
+```
+- auto-fill
+```
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px)
+}
+```
+每列宽度为100px,每行尽可能有更多的列
+- fr
+fr,即 fraction, 按照数值比例评分余下空间
+```
+.container {
+    display: grid;
+    grid-template-columns: 100px 1fr 2fr
+}
+```
+- minmax函数
+```
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr minmax(100px,200px)
+}
+```
+minmax(100px,200px)表示列宽在100px到200px之间
+- auto
+```
+.container {
+    display: grid;
+    grid-template-columns: 100x auto 100px
+}
+```
+- 网格线名称
+```
+.container {
+    display: grid;
+    grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4]; 
+    grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4]
+}
+```
+- 布局实例
+.container {
+    display: grid;
+    grid-template-columns: 70% 30%
+    grid-template-columns: 20% 80%
+}
+
+### grid-template-areas 属性值
+
+
+
+

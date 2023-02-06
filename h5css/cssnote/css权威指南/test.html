@@ -7,34 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="my_block_box">
-        <div class="son1" style="background:blue;">块子元素11111111</div>
-        <div class="son2" style="background:yellow">块子元素2222222</div>
-        <div class="son3" style="background:green">块子元素3</div>
+    <div class="container">
+        <div style="background: orange; grid-area: f">item6</div>
+        <div style="background: yellow; grid-area: a">item1</div>
+        <div style="background: white; grid-area: b">item2</div>
+        <div style="background: blue; grid-area: c">item3</div>
+        <div style="background: purple; grid-area: e">item5</div>
+        <div style="background: green; grid-area: d">item4</div>
     </div>
 </body>
     
 <style>
-    .son1 {
-        width: 100px;
-        flex-basis: 500px;
-    }
-    .son2{
-        width: 100px
-    }
-    .son3{
-        width: 100px;
-    }
-    .my_block_box{
-        height: 200px;
-        width: 300px;
-        background-color: red;
-        /* flex-direction: column; */
-        display: flex;
-        /* flex-wrap: wrap; */
-        justify-content: center;
-        /* align-items: center; */
-        /* align-content: center; */
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 3fr;
+        grid-template-rows: 2fr 2fr 1fr;
+        grid-template-areas: 
+            "a b c"
+            "d e f";
     }
 </style>
 
