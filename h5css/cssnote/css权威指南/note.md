@@ -321,6 +321,17 @@ webkit_box {
 | column-gap (原 grid-column-gap)       | \<length>   | 规定列间距 |
 | gap 原 (grid-gap) | \<length> \<length> | \<grid-row-gap> \<grid-column-gap>(若忽略了第二个值则浏览器认为第二个值等于第一个值)  |
 | grid-template-areas | 详述如下 | 规定区域 |
+| grid-auto-flow | row (默认) column row-dense column-dense | items的排列方式 |
+| justify-items | start end center stretch（没有指定大小时，占满整个单元格） | 单元格内容的水平对齐方式 |
+| align-items | 同 justify-items | 单元格内容的垂直对齐方式 |
+| place-items | \<justify-items> \<align-items> | justify-items 与 align-items 的简写方式 (若只写一个值，浏览器认为是两个一样的值)|
+| justify-content | start \| end \| center \| stretch \| space-around \| space-between \| space-evenly | 将网格内容看作一个整体，这个整体在container中的水平对齐方式 |
+| align-content | 同 justify-content | 整体在container中的垂直对齐方式 |
+| place-content | \<justify-content> \<align-content> | 类 place-items |
+| grid-auto-rows | /<length> | 规定范围之外，浏览器自动创建的网格的行高（不指定则又单元格内容决定） |
+| grid-auto-columns | </length> | 类 grid-auto-columns |
+| grid-template | \<grid-template-columns> \<grid-template-rows> \<grid-template-areas> | 简写形式，不常用 |
+| grid | \<grid-template-rows> \<grid-template-columns> \<grid-template-areas> \<grid-auto-row> \<grid-auto-columns> \<grid-auto-flow> | 简写形式，不常用 |
 
 #### grid-template-rows、grid-template-columns属性值
 - 绝对单位
@@ -386,6 +397,7 @@ minmax(100px,200px)表示列宽在100px到200px之间
     grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4]
 }
 ```
+[cn] [rn] 是为网格线起的名字，可以是任何合法字符
 - 布局实例
 .container {
     display: grid;
@@ -395,6 +407,43 @@ minmax(100px,200px)表示列宽在100px到200px之间
 
 ### grid-template-areas 属性值
 
+```
+<div class="container">
+    <div style="background: orange; grid-area: f">item6</div>
+    <div style="background: yellow; grid-area: a">item1</div>
+    <div style="background: white; grid-area: b">item2</div>
+    <div style="background: blue; grid-area: c">item3</div>
+    <div style="background: purple; grid-area: e">item5</div>
+    <div style="background: green; grid-area: d">item44</div>
+    <div style="background: red; grid-area: d">item4</div>
+</div>
 
 
+<style>
+    .container {
+        display: grid;
+        grid-template-areas: 
+            "a b c"
+            "d e f";
+    }
+</style>
+```
+<image src="../../../assets/img/grid_template_areas.png" />
 
+- 若items指定了所在区域，即设置了 grid-area 属性，则 items 的排列与其在 html 中的排列无关
+- 若有多个item 指定了同一个区域， 即 grid-area 属性值相同，则排列在 html 后面的item 覆盖之前的
+
+### item 属性
+
+| 属性 | 值 | 效果 |
+| ------- | -------- | ------ |
+| grid-row-start | 线次序 线名称 span (起始侧到结束侧跨越的网格数，设置在start和column上效果一致) | 行起始侧边框（上边框）所在的网格线 |
+| grid-row-end | 同上 | 行结束测边框（下边框）所在的网格线 |
+| grid-column-start | 同上 | 列起始测边框（左边框）所在的网格线 |
+| grid-column-end | 同上 | 列结束测边框（右边框）所在的网格线 |
+| grid-row | \<grid-row-start> / \<grid-row-end> | 简写 |
+| grid-column | \<grid-column-start> / \<grid-column-end> | 简写 |
+| grid-area | 所在区域名称 | item所在的区域 （container 有 grid-template-areas 属性） |
+| justify-self | 同 container 的 justify-items | 同 container 的 justify-items，作用于单个item  |
+| align-self | 同 container 的 align-items | 同 container 的 align-items，作用于单个item  |
+| place-self | \<justify-self> \<align-self> | 简写 |

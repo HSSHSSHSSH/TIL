@@ -8,23 +8,30 @@
 </head>
 <body>
     <div class="container">
-        <div style="background: orange; grid-area: f">item6</div>
-        <div style="background: yellow; grid-area: a">item1</div>
-        <div style="background: white; grid-area: b">item2</div>
-        <div style="background: blue; grid-area: c">item3</div>
-        <div style="background: purple; grid-area: e">item5</div>
-        <div style="background: green; grid-area: d">item4</div>
+        <div class="item item5" style="background: purple;">item5</div>
+        <div class="item" style="background: orange;">item6</div>
+        <div class="item" style="background: yellow;">item1</div>
+        <div class="item" style="background: gray;">item2</div>
+        <div class="item" style="background: blue;">item3</div>
     </div>
 </body>
     
 <style>
+    .item {
+        height: 50px;
+        width: 50px;
+    }
+    .item5 {
+        grid-column-end: span 2
+    }
     .container {
+        /* justify-content: stretch; */
+        margin:auto;
         display: grid;
-        grid-template-columns: 1fr 2fr 3fr;
-        grid-template-rows: 2fr 2fr 1fr;
-        grid-template-areas: 
-            "a b c"
-            "d e f";
+        height: 500px;
+        width: 500px;
+        grid-template-columns: [af] 100px [c2] 100px [c3] auto [c4]; 
+        grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4]
     }
 </style>
 
