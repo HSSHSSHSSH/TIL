@@ -1,4 +1,5 @@
 ## 选择器
+---
 
 ### 并集选择器
     h1,p {color:red}
@@ -20,19 +21,22 @@
     ol > li > a {color: red}
     将ol下所有子元素li下所有子元素a的文本颜色改为红色
 
-### 兄弟选择器（没用过）
-    h1 + h2 {color: red}
-    将紧挨着h1后的h2文本改为红色
-    
-    h1 + h2 + h3 {color: red}
-    将紧挨着h1后的紧挨着h2后的h3元素文本改成红色
+### 相邻兄弟选择器（没用过）
+  h1 + h2 {color: red}
+  将**紧挨着**h1后的h2文本改为红色
+### 一般兄弟选择器
+  h1 + h2 {color: red}
+  将**所有**与h1同级的h2文本改为红色
 
+**以上两种兄弟选择器最多有两级**
 ## 盒模型
+---
   <img src="../../../assets/img/box_model.png" />
   <img src="../../../assets/img/standard_box_model.png" />
   <img src="../../../assets/img/ie_box_model.png" />
 
 ## 伪类伪元素
+---
 
    ### 静态伪类
    与用户行为无关
@@ -96,8 +100,160 @@
    eg:: p:first-child em {color:red} 不合法
 
 
-## 浮动和定位
+## 伪类伪元素 （2）
+---
 
+### 伪类
+- :active
+  匹配被用户激活的元素。当浏览器检测到元素被激活时给出反馈。当用户行为是鼠标点击时，代表用户按下键和松开键之间的时间。
+  常用于\<a>、\<button>中，其他元素同样可使用，部分元素无效，如image
+
+**当和伪类:link,:hover,:visited一起使用时，注意顺序,:link -->:visited-->:hover-->:active**
+
+- :any-link (dev)
+  匹配有链接锚点的元素，即具有 href 属性的元素。
+
+- :autofill
+  匹配被浏览器自动填充的 input 元素，当用户改变input中的字段时，匹配失效
+
+- :blank (dev risk)
+  匹配用户输入为空的 input 元素。
+  **目前多数浏览器不支持**
+- checked 
+  匹配任何处于选中状态的 radio(\<input type="radio">), checkbox (\<input type="checkbox">) select 中的 option
+
+- current (unknown)
+
+- default
+  匹配一组相关元素中默认的**表单元素**
+  通常使用在 \<button>, \<input type="checkbox"> \<input type="radio"> select中的option
+
+- defined
+  匹配所有已定义的元素。包括浏览器内置的元素（div, p等）和用户自定义的元素(通过CustomerElementRegister.define())。
+
+  当页面中自定义元素需要一些时间时，通常采取以下办法避免样式问题：
+  ```
+  customer-element:not(:defined) {
+    display: none
+  }
+
+  customer-element:defined {
+    display: block
+  }
+
+  ```
+  - :dir() (dev risk)
+  匹配特定问题书写方向的元素
+
+  - :disabled
+  匹配被禁用的元素。
+  如果一个元素不能被激活（如选择、点击或接受文本输入）或获取焦点，则该元素处于被禁用状态。元素还有一个启用状态（enabled state），在启用状态下，元素可以被激活或获取焦点。
+  
+  - :empty
+  匹配无子元素的元素。
+  子元素只可以时元素节点或文本（包括空格）。
+  多数浏览器不可匹配带有空格的文本元素。
+
+  - :enabled
+  匹配被启用的元素。（与disabled对应）
+
+  - :first 
+  @page:first {
+
+  }
+  打印时，第一页的样式;只可改变以下css属性:
+  margin, orphans, windows, 文档何时换页
+
+  - :first-child
+  匹配一组兄弟元素中的第一个子元素
+
+  - first-of-type 
+  匹配父元素下第一个特定类型的元素。
+  ```
+    p:first-of-type {
+      color:red
+    }
+  ```
+  所匹配到的p元素均是其父元素下的第一个p元素
+
+  - :fullscreen (dev risk)
+  匹配当前处于全屏显示模式的元素。
+
+  - :future (unknown)
+
+  - :focus
+  匹配当前获得焦点的元素。
+
+  - :focus-visible
+  当元素匹配:focus且客户端(UA)的启发式引擎决定当前焦点应当可见时，:focus-visible生效。
+  通常用于元素通过不同方式(鼠标或键盘)获取焦点的不同显示方式。
+  如button或自定义元素可使用:focus-visible元素定义键盘操作时获取焦点的样式。
+
+  - :focus-within
+  匹配获取焦点或其子元素获取焦点的元素。
+
+  - :has(\<relative-selector-list>)
+  匹配满足选择器参数条件的元素。
+  h1:has(+h2) 表示后面紧跟着h2元素的h1元素
+
+  - :host //todo 补完 shadow dom 后填坑
+
+  - :host() // todo
+
+  - :host-context() // todo
+
+  - :hover
+  适用于用户使用指示设备虚指一个元素（没有激活它）的情况。
+  用户的可视客户端比如 Firefox, Internet Explorer, Safari, Opera or Chrome，会在光标（鼠标指针）悬停在元素上时提供关联的样式。
+
+  - :indeterminate
+  匹配状态不确定的表单元素。
+
+  - :in-range
+  代表一个 \<input> 元素，其当前值处于属性min 和max 限定的范围之内。
+
+  - :invalid
+  表示任意内容未通过验证的 \<input> 或其他 \<form> 元素 。
+
+  - :is(\<selector-list>)
+  将选择器列表作为参数，并选择该列表中任意一个选择器可以选择的元素
+
+  - :lang(\<language-code>)
+  根据元素语言匹配元素
+  ```
+  <div lang="en">English Text</div>
+
+  <style>
+    div:lang(en) {
+      color:red
+    }
+  </style>
+  ```
+
+  - :last-child
+  匹配一组兄弟元素中的最后一个元素。
+  
+  - :last-of-type
+  匹配父元素下最后一个特定类型的元素。
+
+  - :left
+  同:first,打印时使用，设置文档左侧页的css样式。
+  仅可设置以下css属性：
+  margin, padding, border, background
+
+  - :link
+  选中元素中的未被访问的链接。
+
+  - local-link (dev)
+
+  - :modal 
+  匹配一个元素，该元素处于排除与外部元素的所有交互的状态，直到交互被解除。模态伪类可以同时选择多个元素，但是只有一个元素是活动的并且能够接收输入。
+  
+  - 
+
+
+## 浮动和定位
+---
    ### 浮动 (float)
    **定义元素相对于其原本位置、父元素、其他元素、浏览器窗口的位置**
 
@@ -171,6 +327,7 @@
         **是父元素，而非祖先元素**
 
 ## 网页布局
+---
 
 ### Flex
 
@@ -293,7 +450,7 @@ webkit_box {
  | flex | none OR \<flex-grow> \<flex-shrink> \<flex-basis>(默认为 0 1 auto;该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。) | flex-grow flex-shrink flex-basis的简写，后两个属性可选 |
  | align-self | auto flex-start flex-end center baseline stretch(默认auto,继承container的align-item属性) | 为项目单独定义对齐方式，与container的align-item效果相同（除auto）  |
 
-## Grid布局
+### Grid布局
 
 网格布局（Grid）划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。
 
@@ -447,3 +604,6 @@ minmax(100px,200px)表示列宽在100px到200px之间
 | justify-self | 同 container 的 justify-items | 同 container 的 justify-items，作用于单个item  |
 | align-self | 同 container 的 align-items | 同 container 的 align-items，作用于单个item  |
 | place-self | \<justify-self> \<align-self> | 简写 |
+
+
+## Shadow Dom
