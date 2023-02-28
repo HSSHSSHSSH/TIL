@@ -1,9 +1,8 @@
 let VSHADER_SOURCE =  // 顶点着色器
 `attribute vec4 a_Position; \n` +
-`attribute float a_PositionSize; \n` +
+`uniform mat4 u_xFormMatrix; \n` +
 `void main() { \n` + 
-` gl_Position = a_Position \n;` +
-` gl_PointSize = 10.0; \n` +
+` gl_Position = u_xFormMatrix * a_Position \n;` +
 `}\n`
 let FSHADER_SOURCE = // 片源着色器
 `void main() { \n` +
@@ -27,20 +26,32 @@ function main () {
     console.log('Failed to get the storage location of a_Position')
     return
   }
+
+  let angle = 90
+  let radian = Math.PI * angle / 180.0
+  let cosB = Math.cos(radian)
+  let sinB = Math.sin(radian)
+  let xFormMatrix = new Float32Array([
+    cosB, sinB, 0.0, 0.0,
+    -sinB, cosB, 0.0, 0.0,
+    0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 1.0
+  ])
+  console.log('testMatrx4', testMatrx4);
+  let u_xFormMatrix = gl.getUniformLocation(gl.program, 'u_xFormMatrix')
+  gl.uniformMatrix4fv(u_xFormMatrix, false, xFormMatrix)
   gl.clearColor(0.0, 0.0, 0.0, 1.0) // 设置canvas背景色
   gl.clear(gl.COLOR_BUFFER_BIT) // 清空canvas
-  gl.drawArrays(gl.POINTS, 0, 1) // 绘制
+  gl.drawArrays(gl.TRIANGLES, 0, n) // 绘制
 }
 
 
 function initVertexBuffers(gl) {
   let verticesSizes = new Float32Array([
-    0.0, 0.5, // 第一个点
-    -0.5, -0.5, // 第二个点
-    0.5, -0.5,// 第三个点
-    0.5, 0.5
+    -0.5,0.5,
+    -0.5,-0.5,
+    0.5,-0.5,
   ])
-  let n = 3 // 点的个数
   // 创建缓冲区对象
   let vertexSizeBuffer = gl.createBuffer()
   if (!vertexSizeBuffer) {
