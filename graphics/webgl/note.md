@@ -124,4 +124,9 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 
 <img src='../../assets/img/matrix4.png'>
 
+### 动画
 
+生成动画需：
+
+- 在 t0, t1, t2 等时刻重复调用某一函数来绘制三角形
+- 在每次绘制之前，清除上次的内容，对这次的绘制内容进行变换
