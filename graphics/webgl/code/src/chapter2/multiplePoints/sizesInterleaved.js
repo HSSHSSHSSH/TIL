@@ -35,17 +35,15 @@ function main () {
 
 function initVertexBuffers(gl) {
   let verticesSizes = new Float32Array([
-    0.0, 0.5, // 第一个点
-    -0.5, -0.5, // 第二个点
-    0.5, -0.5,// 第三个点
+    0.0, 0.5, 10.0, // 第一个点
+    -0.5, -0.5, 30.0, // 第二个点
+    0.5, -0.5, 20.0// 第三个点
   ])
-  let pointSizes = new Float32Array([
-    10.0,35.0,25.0
-  ])
+  let FSZIE = verticesSizes.BYTES_PER_ELEMENT
+  console.log('FSIZE', FSZIE)
   let n = 3 // 点的个数
   // 创建缓冲区对象
   let vertexSizeBuffer = gl.createBuffer()
-  let pointSizeBuffer = gl.createBuffer()
   if (!vertexSizeBuffer) {
     console.log('Failed to create the buffer object')
     return -1
@@ -56,15 +54,18 @@ function initVertexBuffers(gl) {
   gl.bufferData(gl.ARRAY_BUFFER, verticesSizes, gl.STATIC_DRAW)
   let a_Position = gl.getAttribLocation(gl.program, 'a_Position')
   // 将缓冲区对象分配给a_Position变量
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 8, 0)
+  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSZIE * 3, 0)
   // 连接a_Position变量与分配给它的缓冲区对象
   gl.enableVertexAttribArray(a_Position)
-
-  gl.bindBuffer(gl.ARRAY_BUFFER,pointSizeBuffer)
-  gl.bufferData(gl.ARRAY_BUFFER,pointSizes,gl.STATIC_DRAW)
-  let a_PositionSize = gl.getAttribLocation(gl.program,'a_PositionSize')
-  gl.vertexAttribPointer(a_PositionSize,1,gl.FLOAT,false,0,0)
+  
+  let a_PositionSize = gl.getAttribLocation(gl.program, 'a_PositionSize')
+  gl.vertexAttribPointer(a_PositionSize, 1, gl.FLOAT, false, FSZIE * 3, FSZIE * 2) 
   gl.enableVertexAttribArray(a_PositionSize)
+  // gl.bindBuffer(gl.ARRAY_BUFFER,pointSizeBuffer)
+  // gl.bufferData(gl.ARRAY_BUFFER,pointSizes,gl.STATIC_DRAW)
+  // let a_PositionSize = gl.getAttribLocation(gl.program,'a_PositionSize')
+  // gl.vertexAttribPointer(a_PositionSize,1,gl.FLOAT,false,0,0)
+  // gl.enableVertexAttribArray(a_PositionSize)
 
   return n
 }
