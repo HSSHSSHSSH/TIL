@@ -86,7 +86,7 @@ function initTextures(gl, n) {
   image.src = '../../../resources/sky.jpg'
   return true
 }
-
+  
 function loadTexture(gl, n, texture, u_Sampler, image) {
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1) // 对纹理图像进行y轴反转
   // 开启0号纹理单元

@@ -168,5 +168,71 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 
 纹理坐标系为独立于 WebGL 系统坐标的的一种坐标系，为区分二者，纹理坐标系的横轴称为 s 轴，纵轴称为 t 轴，即 st 坐标系统。
 
-在纹理坐标系中，无视纹理图像的尺寸，右上角的坐标均为（1.0，1.0）
+在纹理坐标系中，无视纹理图像的尺寸，右上角的坐标均为（1.0，1.0）。
 
+### 对纹理图像进行配置
+
+- 图像 Y 轴翻转
+
+在使用纹理图像之前，需调用 gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false) 对图像进行 Y 轴翻转，因为 WebGL 的坐标系统与浏览器中的图片坐标系统 Y 轴方向相反。
+
+**gl.pixelStorei**
+
+| 参数                                                         | 返回值 | 异常                            |
+| ------------------------------------------------------------ | ------ | ------------------------------- |
+| panme:<br />             - gl.UNPACK_FLIP_Y_WEBGL: 对图像进行 Y 轴翻转，默认值为false<br />            - gl.UNPACK_PERMULTIPLY_ALPHA_WEBGL: 将图像的RGB颜色值都乘 A ，默认值为 false<br /> param: 0(false) \|\| 非0（true） : 必须为整数 | 无     | INVALID_ENUM: pname不是合法的值 |
+|                                                              |        |                                 |
+
+
+
+- 激活纹理单元
+
+  在 WebGL 中，使用一种称为 **纹理单元（texture unit）** 的机制管理纹理图像，每个纹理图像都通过一个纹理单元来管理，纹理单元的个数硬件以及浏览器中 WebGL 的实现。默认情况下，至少支持8个，即 gl.TEXTURE0 ..... gl.TEXTURE7。
+
+  <img src="../../assets/img/texture_unit.png" />
+
+  
+
+在使用纹理单元之前，需调用 gl.activeTexture() 来激活纹理单元。
+
+**gl.activeTexture()**
+
+| 参数                                                         | 返回值 | 异常                             |
+| ------------------------------------------------------------ | ------ | -------------------------------- |
+| texUnit: 纹理单元<br />              - gl.TEXTURE.....gl.TEXTURE7: 指定准备激活的纹理单元 | null   | INVALID_ENUM: texUnit 的值不合法 |
+
+- 绑定纹理对象
+
+  类似与对缓冲区进行写入操作之前需绑定 target，在对纹理对象进行操作之前也需要绑定 target。
+
+  在 WebGL 中，无法直接操作纹理对象，必须将纹理对象绑定在 target 上，通过 target 来操作纹理对象。
+  
+
+  **gl.bindTexteure()**
+
+  | 参数                                                         | 返回值 | 异常                       |
+  | ------------------------------------------------------------ | ------ | -------------------------- |
+  | target: 纹理类型<br />          - gl.TEXTURE_2D: 二位纹理<br />          - gl.TEXTURE_CUBE_MAP: 立方体纹理<br /> texture: 待绑定的纹理对象 | null   | INVALID_ENUM: target不合法 |
+
+  调用此方法后，开启了纹理对象，并将纹理对象绑定在纹理单元上。
+  
+  <img src="../../assets/img/after_active.png">
+
+- 配置纹理对象的参数
+
+  以下需确定：
+
+  - 如何根据纹理坐标来获取纹素颜色
+  - 按哪种方式重复填充纹理
+
+​	**gl.texParameteri()**
+
+| 参数                                                         | 返回值 | 异常                                                         |
+| ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
+| target: 纹理类型，同上<br /> pname: 纹理参数<br /> param: 纹理参数的值 | null   | INVALID_ENUM: target 不合法<br /> INVALID_OPERATION: 当前目标未绑定纹理对象 |
+
+<img src="../../assets/img/tex_pname.png" />
+<img src="../../assets/img/tex_param.png" />
+
+执行此方法后，WebGL 中的状态如下：
+<img src="../../assets/img/after_set_param.png">
