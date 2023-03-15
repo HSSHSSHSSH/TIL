@@ -207,23 +207,24 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 
   在 WebGL 中，无法直接操作纹理对象，必须将纹理对象绑定在 target 上，通过 target 来操作纹理对象。
   
-
-  **gl.bindTexteure()**
-
+  **gl.bindTexture()**
+  
   | 参数                                                         | 返回值 | 异常                       |
   | ------------------------------------------------------------ | ------ | -------------------------- |
   | target: 纹理类型<br />          - gl.TEXTURE_2D: 二位纹理<br />          - gl.TEXTURE_CUBE_MAP: 立方体纹理<br /> texture: 待绑定的纹理对象 | null   | INVALID_ENUM: target不合法 |
-
+  
   调用此方法后，开启了纹理对象，并将纹理对象绑定在纹理单元上。
   
   <img src="../../assets/img/after_active.png">
-
+  
 - 配置纹理对象的参数
 
   以下需确定：
 
   - 如何根据纹理坐标来获取纹素颜色
   - 按哪种方式重复填充纹理
+  
+  即：确定映射方式
 
 ​	**gl.texParameteri()**
 
@@ -236,3 +237,32 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 
 执行此方法后，WebGL 中的状态如下：
 <img src="../../assets/img/after_set_param.png">
+
+- 将纹理图像分配给纹理对象
+
+  **gl.texImage2D()**
+
+| 参数                                                         | 返回值 | 异常                                                         |
+| ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
+| target: gl.TEXTURE_2D \|\| gl.TEXTURE_CUBE_MAP<br /> level: 0 (此参数为金字塔纹理准备，书中不涉及)<br /> internalformat: 图像的内部格式<br /> format: 纹理数据的格式，需与 internalformat 一致<br /> type: 纹理数据的类型<br /> image: 包含纹理图像的 Image 图像 | null   | INVALID_ENUM: target不合法<br /> INVALID_OPERATION: 当前目标未绑定纹理图像 |
+
+执行此函数后，WebGL 系统中的内部状态如下
+<img src="../../assets/img/after_distribute.png">
+
+以下是 internalformat 与 format 的值：
+<img src="../../assets/img/format_val.png">
+
+
+以下是 type 的值：
+<img src="../../assets/img/type_val.png">
+
+- 将纹理单元传给片元着色器
+
+  **gl.uniform1i()**
+
+gl.uniform1i(u_Sampler,0) 中的 u_Sampler 为片元着色器中纹理对象的存储位置，0 为绑定的纹理单元编号，即 gl.TEXTUREn 中的 n。
+
+此函数执行后，WebGL 系统的内部状态如下：
+
+<img src="../../assets/img/after_uniform.png">
+
