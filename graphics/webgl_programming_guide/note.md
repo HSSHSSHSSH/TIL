@@ -122,7 +122,7 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
 | location: uniform变量的存储位置<br /> transpose: 在 WebGL 中必须为 false<br /> array: 待传输的类型化数组 | 无     | INVALID_OPERATION: 不存在当前程序对象<br /> INVALID_VALUE: transpose不为false,或数组长度小于16 |
 
-<img src='../../assets/img/matrix4.png'>
+<img src='../../assets/img/graphic/matrix4.png'>
 
 ### 动画
 
@@ -135,7 +135,7 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 
 以helloTriangle.js为例：
 
-<img src="../../assets/img/shader_progress.png">
+<img src="../../assets/img/graphic/shader_progress.png">
 
 按照 gl.drawArrays() 中的参数 n 为 3，顶点着色器将被执行3此，每次的点都进入**装配区**;
 
@@ -189,7 +189,7 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 
   在 WebGL 中，使用一种称为 **纹理单元（texture unit）** 的机制管理纹理图像，每个纹理图像都通过一个纹理单元来管理，纹理单元的个数硬件以及浏览器中 WebGL 的实现。默认情况下，至少支持8个，即 gl.TEXTURE0 ..... gl.TEXTURE7。
 
-  <img src="../../assets/img/texture_unit.png" />
+  <img src="../../assets/img/graphic/texture_unit.png" />
 
   
 
@@ -215,7 +215,7 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
   
   调用此方法后，开启了纹理对象，并将纹理对象绑定在纹理单元上。
   
-  <img src="../../assets/img/after_active.png">
+  <img src="../../assets/img/graphic/after_active.png">
   
 - 配置纹理对象的参数
 
@@ -232,11 +232,11 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
 | target: 纹理类型，同上<br /> pname: 纹理参数<br /> param: 纹理参数的值 | null   | INVALID_ENUM: target 不合法<br /> INVALID_OPERATION: 当前目标未绑定纹理对象 |
 
-<img src="../../assets/img/tex_pname.png" />
-<img src="../../assets/img/tex_param.png" />
+<img src="../../assets/img/graphic/tex_pname.png" />
+<img src="../../assets/img/graphic/tex_param.png" />
 
 执行此方法后，WebGL 中的状态如下：
-<img src="../../assets/img/after_set_param.png">
+<img src="../../assets/img/graphic/after_set_param.png">
 
 - 将纹理图像分配给纹理对象
 
@@ -247,14 +247,14 @@ let uniform4f = gl.getUniformLocation(gl.program, 'u_Translation')
 | target: gl.TEXTURE_2D \|\| gl.TEXTURE_CUBE_MAP<br /> level: 0 (此参数为金字塔纹理准备，书中不涉及)<br /> internalformat: 图像的内部格式<br /> format: 纹理数据的格式，需与 internalformat 一致<br /> type: 纹理数据的类型<br /> image: 包含纹理图像的 Image 图像 | null   | INVALID_ENUM: target不合法<br /> INVALID_OPERATION: 当前目标未绑定纹理图像 |
 
 执行此函数后，WebGL 系统中的内部状态如下
-<img src="../../assets/img/after_distribute.png">
+<img src="../../assets/img/graphic/after_distribute.png">
 
 以下是 internalformat 与 format 的值：
-<img src="../../assets/img/format_val.png">
+<img src="../../assets/img/graphic/format_val.png">
 
 
 以下是 type 的值：
-<img src="../../assets/img/type_val.png">
+<img src="../../assets/img/graphic/type_val.png">
 
 - 将纹理单元传给片元着色器
 
@@ -264,5 +264,5 @@ gl.uniform1i(u_Sampler,0) 中的 u_Sampler 为片元着色器中纹理对象的�
 
 此函数执行后，WebGL 系统的内部状态如下：
 
-<img src="../../assets/img/after_uniform.png">
+<img src="../../assets/img/graphic/after_uniform.png">
 

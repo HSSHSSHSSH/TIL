@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+</head>
+<body>
+  <h1>SnapShots</h1>
+  <ul>
+    <li>
+      <a href="../assets/img/demo1.jpg" class="myLink" title="demo1" onclick="showPic(this); return false">demo1</a>
+    </li>
+    <li>
+      <a href="../assets/img/demo2.jpg" class="myLink" title="demo2" onclick="showPic(this); return false">demo2</a>
+    </li>
+    <li>
+      <a href="../assets/img/demo3.jpg" class="myLink" title="demo3" onclick="showPic(this); return false">demo3</a>
+    </li>
+  </ul>
+  <p id="description">choose an image</p>
+  <img src="../assets/img/demo0.jpeg" id="placeholder" alt="my image Gallery" onclick="showPic(this); return false">
+</body>
+  <!-- 使用 DOM -->
+<script src="./imageGallery.js"></script>
+<script>
+  // const links = document.querySelectorAll('.myLink');
+  // links.forEach(link => {
+  //   link.addEventListener('click',(event) => {
+  //     // event.preventDefault()
+  //     showPic(link)
+  //     return false
+  //   })
+  // })
+</script>
+
+</html>
