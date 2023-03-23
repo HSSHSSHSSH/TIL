@@ -266,3 +266,7 @@ gl.uniform1i(u_Sampler,0) 中的 u_Sampler 为片元着色器中纹理对象的�
 
 <img src="../../assets/img/graphic/after_uniform.png">
 
+
+
+### 3D
+
