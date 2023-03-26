@@ -4,18 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>ortho view</title>
 </head>
 <body onload="main()">
   <canvas id="webgl">
-    请使用支持canvas的浏览器
+    请使用支持webgl的浏览器
   </canvas>
+  <p id="nearFar">
+    near 与 far 的值 
+  </p>
 </body>
 <script src="../../lib/webgl-utils.js" ></script>
 <script src="../../lib/webgl-debug.js" ></script>
 <script src="../../lib/cuon-utils.js" ></script>
 <script src="../../lib/cuon-matrix.js"></script>
-<!-- <script src="./lookAtTriangles.js"></script> -->
-<!-- <script src="./lookAtRotatedTriangles.js"></script> -->
-<script src="./lookAtTrianglesWithKeys.js"></script>
+<script src="./orthoView.js"></script>
 </html>
