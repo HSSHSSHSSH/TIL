@@ -268,5 +268,67 @@ gl.uniform1i(u_Sampler,0) 中的 u_Sampler 为片元着色器中纹理对象的�
 
 
 
-### 3D
+### 3D MVP
 
+#### M (model matrix 模型矩阵)
+
+模型矩阵是一个 4*4 的矩阵，用来描述物体的平移、旋转、缩放等操作。
+
+#### V (view matrix 视图矩阵)
+
+视图矩阵是一个 4*4 的矩阵，用来描述相机的位置和朝向
+
+视图矩阵中的矢量信息为：
+
+- 视点，即视线的起点，用 (eyeX, eyeY, eyeZ) 表示
+- 观察目标点，用 (atX, atY, atZ)表示
+- 上方向，最终绘制在屏幕上的影像中向上的方向,用  (upX, upY, upZ) 表示
+
+创建视图矩阵:
+
+Matrix4.setLookAt(eyeX, eyeY, eyeZ, atX, atY, atZ, upX, upY, upZ)
+
+#### P (projection matrix 投影矩阵)
+
+投影矩阵是一个 4*4 的矩阵，用来描述物体在 3D 空间的投影效果：
+
+- 正射投影
+- 透视投影
+
+
+
+模型视图投影矩阵即 以上三种矩阵的相乘，注意在相乘时的顺序，
+
+- 列主序： u_MVPMatrix = u_ProjMatrix * u_ModelMatrix * u_ViewMatrix
+- 行主序：以上取转置
+
+#### 隐藏面消除与深度冲突
+
+当希望被遮挡的物体不被绘出在屏幕上时，需开启 隐藏面消除功能：
+
+1. 开启隐藏面消除
+
+   gl.enable(gl.DEPTH_TEST)
+
+2. 在绘制之前，清除深度缓冲区
+
+   gl.clear(gl.DEPTH_BUFFER_BIT)
+
+
+
+当多个物体的深度，即 z 轴位置很接近时，可能会产生深度冲突，需：
+
+1. 启用多边形偏移
+
+   gl.enable(gl.POLYGON_OFFSET_FILL)
+
+2. gl.polygonOffset(1.0,1.0)
+
+
+
+### 光照
+
+当光线照到物体上时，发生了：
+
+- 根据光源和光线方向，物体的不同表面的阴暗程度产生了差异
+- 根据光源和光线方向，物体在地面上产生了阴影
