@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <div>蛙叫你</div>
+</body>
+<script>
+  let my_string = "hello world";
+  let my_number = 123;
+  let my_boolean = true;
+  let my_array = [1, 2, 3];
+  let my_object = {name: "蛙叫你", age: 18};
+  let my_null = null;
+  let my_undefined = undefined;
+  let my_function = function() {
+    console.log("hello world");
+  };
+  console.log('typeof = ',typeof my_string, ' [[Class]] = ', Object.prototype.toString.call(my_string));
+  console.log('typeof = ',typeof my_number, ' [[Class]] = ', Object.prototype.toString.call(my_number));
+  console.log('typeof = ',typeof my_boolean, ' [[Class]] = ', Object.prototype.toString.call(my_boolean));
+  console.log('typeof = ',typeof my_array, ' [[Class]] = ', Object.prototype.toString.call(my_array));
+  console.log('typeof = ',typeof my_object, ' [[Class]] = ', Object.prototype.toString.call(my_object));
+  console.log('typeof = ',typeof my_null, ' [[Class]] = ', Object.prototype.toString.call(my_null));
+  console.log('typeof = ',typeof my_undefined, ' [[Class]] = ', Object.prototype.toString.call(my_undefined));
+  console.log('typeof = ',typeof my_function, ' [[Class]] = ', Object.prototype.toString.call(my_function));
+  let My_Constructor = function() {
+    return 123;
+  };
+  let my_instance = new My_Constructor();
+  console.log('typeof = ',typeof my_instance, ' [[Class]] = ', Object.prototype.toString.call(my_instance));
+  class MyClass {
+    constructor() {
+      this.name = "蛙叫你";
+    }
+    get [Symbol.toStringTag]() {
+      return "MyClass";
+    }
+  }
+  let my_class_instance = new MyClass();
+  console.log('typeof = ',typeof my_class_instance, ' [[Class]] = ', Object.prototype.toString.call(my_class_instance));
+</script>
+</html>

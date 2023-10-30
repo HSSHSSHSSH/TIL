@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scope Chain</title>
+</head>
+<body>
+  <div>这是一些关于作用域链的代码</div>
+</body>
+<script>
+  console.log('蛙叫你 作用域链');
+  function example(a, b) {
+  console.log(arguments); // 输出函数的活动对象 (AO)
+}
+
+example(1, 2);
+</script>
+</html>

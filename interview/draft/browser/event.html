@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event</title>
+  </head>
+  <body>
+    <div id="myElement">这是一些关于事件的代码</div>
+  </body>
+  <script>
+    console.log('这是一些关于事件的代码 蛙叫你')
+    const myElement = document.getElementById('myElement')
+
+    
+    myElement.addEventListener(
+      'click',
+      function (event) {
+        console.log('捕获阶段: Event captured at ', this)
+      },
+      true,
+    ) // 第三个参数设为 true 表示在捕获阶段处理事件
+
+    
+
+    myElement.addEventListener(
+      'click',
+      function (event) {
+        console.log('冒泡阶段: Event bubbled through ', this)
+      },
+      false,
+    ) // 第三个参数设为 false（或省略）表示在冒泡阶段处理事件
+
+
+  </script>
+</html>

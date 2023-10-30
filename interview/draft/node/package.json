@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "promises-aplus-tests": "^2.1.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "test": "promises-aplus-tests promise/source_code/promise.js"
+  }
+}

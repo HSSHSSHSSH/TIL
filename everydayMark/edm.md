@@ -26,3 +26,13 @@ mini-docker
 
 https://github.com/shuveb/containers-the-hard-way
 https://unixism.net/2020/06/containers-the-hard-way-gocker-a-mini-docker-written-in-go/
+
+## 20231018
+
+Chrome浏览器崩溃，错误码 STATUS_INVALID_IMAGE_HASH
+
+解决办法：chrome所在位置中的chrome.exe重命名，例 chrome0.exe，若使用桌面快捷方式，则需将快捷方式的属性中的目标的 chrome.exe也重命名。
+
+以上解决办法使用后在 vscode 中使用 live server 打开html是会有异常，此时修改 live server 的 setting 中的以下属性：
+
+"liveServer.settings.AdvanceCustomBrowserCmdLine": "C:\\Program Files\\Google\\Chrome\\Application\\chrome0.exe"

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型与原型链</title>
+</head>
+<body>
+  <div>这是一些关于原型与原型链的代码</div>
+</body>
+<script>
+  console.log('蛙叫你 原型链');
+  // // 函数对象
+  // function MyConstructor() {
+  //   this.name = "蛙叫你";
+  // }
+  // MyConstructor.prototype.age = 123
+  // let my_instance = new MyConstructor();
+  // function MySubConstructor() {
+  //   MyConstructor.call(this);
+  //   this.isSub = true;
+  // }
+  // MySubConstructor.prototype.arr = [1, 2, 3];
+  // let my_sub_instance = new MySubConstructor();
+  // console.log(my_sub_instance.age);
+  // 类
+  class MyConstructor {
+    constructor() {
+      this.name = '蛙叫你'
+    }
+  }
+  MyConstructor.prototype.age = 123;
+  let my_instance = new MyConstructor();
+
+  class MySubConstructor extends MyConstructor {
+    constructor () {
+      super();
+      this.isSub = true;
+    }
+  }
+  MySubConstructor.prototype.arr = [1, 2, 3];
+  let my_sub_instance = new MySubConstructor();
+  console.log(my_sub_instance.age);
+</script>
+</html>

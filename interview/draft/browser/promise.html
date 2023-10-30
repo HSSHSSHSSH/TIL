@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise</title>
+  </head>
+  <body>
+    <div>这是一些关于promise的代码</div>
+  </body>
+  <script>
+    'use strict'
+
+    let resolve_x = 0
+    let reject_x = 0
+    let p = new Promise((resolve, reject) => {
+      console.log('初始化 p ')
+
+      // resolve(resolve_x)
+      reject(reject_x)
+    })
+
+    let resolvePromise = (value) => {
+      console.log('resolvePromise has been called with value:', value)
+    }
+
+    let rejectPromise = (reason) => {
+      console.log('rejectPromise has been called with reason:', reason)
+    }
+
+    let obj = {
+      test: 'test',
+      // then: function (resolvePromise, rejectPromise) {
+      //   console.log('obj then', this.test)
+      //   // resolvePromise(100)
+      //   rejectPromise(0)
+      // },
+    }
+
+    let p2 = p.then(
+      (value) => {
+        console.log('p has been resolved with value:', value)
+        // return obj
+      },
+      (reason) => {
+        console.log('p has been rejected with reason:', reason)
+        // return obj
+      },
+    )
+    p2.then(resolvePromise, rejectPromise)
+  </script>
+</html>

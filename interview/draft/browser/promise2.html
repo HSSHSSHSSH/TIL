@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>promise2</title>
+  </head>
+  <body>
+    <div>这是另一些关于promise的代码</div>
+  </body>
+  <script>
+    var p1 = new Promise((resolve, reject) => {
+      resolve(100)
+    })
+    var p2 = p1.finally(() => {
+      console.log('finally')
+    })
+    console.log(p1)
+    console.log(p2)
+    console.log(p1 === p2)
+  </script>
+</html>

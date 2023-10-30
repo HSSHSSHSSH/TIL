@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>闭包</title>
+  </head>
+  <body>
+    <div>这是一些关于闭包的代码</div>
+  </body>
+  <script>
+    console.log('蛙叫你  超级闭包');
+    function outer () {
+      var n0 = 0
+      function inner1() {
+        var n1 = 1
+        function inner2() {
+          var n2 = 2
+          function inner3 () {
+            var n3 = 3
+            function inner4 () {
+              var n4 = 4
+              console.log(n0, n1, n2, n3, n4)
+            }
+            return inner4
+          }
+          return inner3()
+        }
+       return inner2()
+      }
+     return inner1()
+    }
+    let f = outer()
+    f()
+  </script>
+</html>

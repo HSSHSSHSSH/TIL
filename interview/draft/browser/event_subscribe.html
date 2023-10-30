@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>observer model</title>
+</head>
+<body>
+  <div>这是一个普普通通的事件监听函数</div>
+</body>
+<script>
+  console.log('蛙叫你 事件监听函数');
+  var events = (function() {
+  var topics = {};
+
+  return {
+    /***
+     * 发布一个主题
+     * @param topic {String} 主题名称
+     * @param info {Object} 传递的信息
+     */
+    publish: function(topic, info) {
+      console.log('publish a topic:' + topic);
+      if (topics.hasOwnProperty(topic)) { // 如果有这个主题
+        topics[topic].forEach(function(handler) { // 遍历这个主题的所有处理函数
+          handler(info ? info : {}); // 执行处理函数
+        })
+      }
+    },
+    /***
+     * 订阅一个主题
+     * @param topic {String} 主题名称
+     * @param handler {Function} 处理函数
+     */
+    subscribe: function(topic, handler) {
+      console.log('subscribe an topic:' + topic);
+      if (!topics.hasOwnProperty(topic)) { // 如果没有这个主题
+        topics[topic] = []; // 创建这个主题
+      }
+
+      topics[topic].push(handler); // 将处理函数放入主题的处理函数数组中
+    },
+    /***
+     * 取消订阅一个主题
+     * @param topic {String} 主题名称
+     * @param handler {Function} 处理函数
+     */
+    remove: function(topic, handler) {
+      if (!topics.hasOwnProperty(topic)) { // 如果没有这个主题
+        return;
+      }
+
+      var handlerIndex = -1; // 处理函数的索引
+      topics[topic].forEach(function(element, index) { // 遍历这个主题的所有处理函数
+        if (element === handler) { // 如果找到了这个处理函数
+          handlerIndex = index; // 记录这个处理函数的索引
+        }
+      });
+
+      if (handlerIndex >= 0) { // 如果找到了这个处理函数
+        topics[topic].splice(handlerIndex, 1); // 从主题的处理函数数组中删除这个处理函数
+      }
+    },
+    removeAll: function(topic) {
+      console.log('remove all the handler on the topic:' + topic);
+      if (topics.hasOwnProperty(topic)) { // 如果有这个主题
+        topics[topic].length = 0; // 清空这个主题的处理函数数组
+      }
+    }
+  }
+})();
+console.log('events',events);
+let event1 = 'event1'
+let event2 = 'event2'
+let event1_handler1 = function(info) {
+  console.log('event1_handler1 triggered', info);
+}
+let event1_handler2 = function(info) {
+  console.log('event1_handler2 triggered', info);
+}
+let event2_handler1 = function(info) {
+  console.log('event2_handler1 triggered', info);
+}
+let event2_handler2 = function(info) {
+  console.log('event2_handler2 triggered', info);
+}
+events.subscribe(event1, event1_handler1);
+events.subscribe(event1, event1_handler2);
+events.subscribe(event2, event2_handler1);
+events.subscribe(event2, event2_handler2);
+events.publish(event1, {name: '蛙叫你'});
+events.publish(event2, {name: '蛙叫你'});
+events.remove(event1, event1_handler1);
+events.publish(event1, {name: '蛙叫你'});
+events.removeAll(event2);
+events.publish(event2, {name: '蛙叫你'});
+</script>
+</html>

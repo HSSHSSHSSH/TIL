@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js执行机制</title>
+  </head>
+  <body>
+    <div>这是一些关于js执行机制的代码</div>
+  </body>
+  <script>
+    console.log('蛙叫你 执行机制')
+    setTimeout(function () {
+      console.log('定时器开始啦')
+    })
+
+    new Promise(function (resolve) {
+      console.log('马上执行for循环啦')
+      for (var i = 0; i < 10000; i++) {
+        i == 99 && resolve()
+      }
+    }).then(function () {
+      console.log('执行then函数啦')
+    })
+
+    console.log('代码执行结束')
+    /**
+     * 输出结果如下：
+     * 蛙叫你 执行机制
+     * 马上执行for循环啦
+     * 代码执行结束
+     * 执行then函数啦
+     * 定时器开始啦
+     */
+    /*
+    原理如下：
+    1. 整段script代码，首先会按照从上到下的顺序解析，然后把其中的同步代码直接执行掉
+    2. 遇到异步代码setTimeout，会将其回调函数移入到"任务队列"中，等待执行
+    3. 遇到Promise，会将其回调函数移入到"任务队列"中，等待执行
+    4. 整段script代码解析完毕，此时同步代码执行完毕，开始执行"任务队列"中的异步代码
+    5. 首先执行Promise的回调函数
+    6. 然后执行setTimeout的回调函数
+    */
+  </script>
+</html>
