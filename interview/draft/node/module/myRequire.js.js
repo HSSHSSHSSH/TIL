@@ -25,3 +25,25 @@ Module.wrapper = [
   "})"
 ]
 
+/**
+ * 模块的加载方式
+ * js 使用 vm.runInThisContext
+ * json 使用 JSON.parse
+ */
+Module._extensions = {
+  '.js'(module) {
+    // 读取文件
+    let content = fs.readFileSync(module.id, 'utf8')
+    // 包装文件
+    let fnStr = Module.wrapper[0] + content + Module.wrapper[1]
+    // 执行文件
+    let fn = vm.runInThisContext(fnStr)
+    // 执行文件
+    fn.call(module.exports, module.exports, module, Require, __dirname, __filename)
+  },
+  '.json'(module) {
+    let content = fs.readFileSync(module.id, 'utf8')
+    module.exports = JSON.parse(content)
+  }
+}
+
