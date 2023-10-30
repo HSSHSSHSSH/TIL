@@ -24,7 +24,7 @@ Module.wrapper = [
   "(function(exports, module, Require, __dirname, __filename) {",
   "})"
 ]
-
+//
 /**
  * 模块的加载方式
  * js 使用 vm.runInThisContext
