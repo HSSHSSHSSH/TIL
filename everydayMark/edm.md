@@ -256,3 +256,43 @@ netstat -an | findstr "LISTENING"
 2. 配置代理软件的绕过规则
 3. 使用 `localhost` 或 IP 地址直接访问
 4. 如果必须用域名，确保将域名添加到代理的例外列表中
+
+#### 20250103
+
+这是一个常见的 Git 代理配置问题。当使用 Clash 作为代理时，需要配置 Git 使用相同的代理设置。
+
+以下是解决方案:
+
+1. 首先确认你的 Clash 代理端口，默认通常是 7890。可以在 Clash 的设置界面查看。
+
+2. 然后配置 Git 使用这个代理。打开终端，运行以下命令:
+
+```bash
+# 设置 http 代理
+git config --global http.proxy http://127.0.0.1:7890
+
+# 设置 https 代理
+git config --global https.proxy http://127.0.0.1:7890
+```
+
+如果之后想要取消代理设置，可以使用:
+
+```bash
+# 取消 http 代理
+git config --global --unset http.proxy
+
+# 取消 https 代理
+git config --global --unset https.proxy
+```
+
+如果上述方法仍然不能解决问题，可以尝试:
+
+1. 检查 Clash 是否开启了"允许局域网连接"
+2. 确认代理端口是否正确（可能不是 7890）
+3. 尝试使用 socks5 代理:
+```bash
+git config --global http.proxy socks5://127.0.0.1:7890
+git config --global https.proxy socks5://127.0.0.1:7890
+```
+
+配置完成后，再次尝试 git push 应该就能正常工作了。
